@@ -1,0 +1,18 @@
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        // Make an AJAX request to the server-side endpoint with the GPS data
+        $.ajax({
+            url: "/get-weather",
+            method: "GET",
+            data: { lat: lat, lon: lon },
+            success: function(response) {
+                console.log(response);
+            }
+        });
+    });
+} else {
+    console.log("Geolocation API is not supported by this browser.");
+}
